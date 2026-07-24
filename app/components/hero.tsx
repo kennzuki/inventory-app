@@ -1,8 +1,6 @@
 'use client';
-import React from 'react'
-import { Bell, Search, ChevronDown, AlertTriangle, } from 'lucide-react'
-import { useMemo } from 'react'
-import { AreaChart, Area, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+
+
 import Topkpi from './Topkpi';
 import { TopBar } from './Topbar';
 import { SalesTrendChart } from './SalesTrendChart';
