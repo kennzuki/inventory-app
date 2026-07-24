@@ -1,12 +1,13 @@
 'use client';
 import React from 'react'
-import {  Bell, Search, ChevronDown, AlertTriangle, } from 'lucide-react'
+import { Bell, Search, ChevronDown, AlertTriangle, } from 'lucide-react'
 import { useMemo } from 'react'
 import { AreaChart, Area, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import Topkpi from './Topkpi';
 import { TopBar } from './Topbar';
 import { SalesTrendChart } from './SalesTrendChart';
-
+import {StockByCategoryChart} from './StockByCategory';
+import {TopProductsList} from "./TopProducts";
 
 
 
@@ -61,7 +62,7 @@ const hero = () => {
             {/* Main column */}
             <div className="flex flex-1 flex-col overflow-hidden">
                 {/* Top bar */}
-                <TopBar/>
+                <TopBar />
 
                 {/* Scrollable body */}
                 <main className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
@@ -73,67 +74,12 @@ const hero = () => {
                     <Topkpi />
 
                     {/* Sales trend */}
-                   <SalesTrendChart data={SALES_TREND}/>
+                    <SalesTrendChart data={SALES_TREND} />
 
                     {/* Pie + Top products */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <div className="rounded-lg border border-black/10 bg-white px-5 py-4">
-                            <h2 className="text-sm font-semibold mb-2">Stock by Category</h2>
-                            <div className="flex items-center gap-4">
-                                <div className="h-44 w-44 shrink-0">
-                                    <ResponsiveContainer width="100%" height="100%">
-                                        <PieChart>
-                                            <Pie
-                                                data={STOCK_BY_CATEGORY}
-                                                dataKey="value"
-                                                nameKey="name"
-                                                innerRadius={40}
-                                                outerRadius={70}
-                                                paddingAngle={2}
-                                            >
-                                                {STOCK_BY_CATEGORY.map((_, i) => (
-                                                    <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
-                                                ))}
-                                            </Pie>
-                                            <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
-                                        </PieChart>
-                                    </ResponsiveContainer>
-                                </div>
-                                <ul className="text-xs space-y-1.5">
-                                    {STOCK_BY_CATEGORY.map((c, i) => (
-                                        <li key={c.name} className="flex items-center gap-2">
-                                            <span
-                                                className="h-2.5 w-2.5 rounded-sm shrink-0"
-                                                style={{ backgroundColor: PIE_COLORS[i % PIE_COLORS.length] }}
-                                            />
-                                            <span className="text-[#4A4A44]">{c.name}</span>
-                                            <span className="ml-auto font-mono text-[#6B6B63]">{c.value}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div className="rounded-lg border border-black/10 bg-white px-5 py-4">
-                            <h2 className="text-sm font-semibold mb-3">Top Products</h2>
-                            <div className="space-y-3">
-                                {TOP_PRODUCTS.map((p, i) => (
-                                    <div key={p.sku} className="flex items-center gap-3">
-                                        <span className="font-mono text-xs text-[#8FA3A1] w-4">
-                                            {i + 1}
-                                        </span>
-                                        <div className="flex-1 min-w-0">
-                                            <div className="text-sm font-medium truncate">{p.name}</div>
-                                            <div className="text-xs text-[#6B6B63] font-mono">{p.sku}</div>
-                                        </div>
-                                        <div className="text-right">
-                                            <div className="text-sm font-mono font-semibold">{p.revenue}</div>
-                                            <div className="text-xs text-[#6B6B63]">{p.units} units</div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        <StockByCategoryChart data={STOCK_BY_CATEGORY} colors={PIE_COLORS} />
+                        <TopProductsList products={TOP_PRODUCTS} />
                     </div>
 
                     {/* Activity + low stock */}
