@@ -7,6 +7,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  MANAGER
+  STAFF
+}
+
+enum TransactionType {
+  STOCK_IN
+  STOCK_OUT
+  ADJUSTMENT
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
@@ -15,6 +33,7 @@ model User {
   inventoryTransactions InventoryTransaction[]
   sales      Sale[]
   purchases  Purchase[]
+  role       Role @default(STAFF)
 }
 
 model InventoryTransaction {
