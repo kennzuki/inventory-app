@@ -8,7 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import type { SalesPoint } from "@/lib/dashboard-data";
+import type { SalesPoint } from "../lib/dashboard-data";
 
 type SalesTrendChartProps = {
   data: SalesPoint[];

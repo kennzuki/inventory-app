@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  // Relations
+  inventoryTransactions InventoryTransaction[]
+  sales      Sale[]
+  purchases  Purchase[]
+}
+
+model InventoryTransaction {
+  id        String   @id @default(uuid())
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
+  type      String   // e.g., "IN" or "OUT"
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+}
+
+model Sale {
+  id        String   @id @default(uuid())
+  customer  Customer @relation(fields: [customerId], references: [id])
+  customerId String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  items     SaleItem[]
+  total     Decimal   @default(0)
+  createdAt DateTime @default(now())
+}
+
+model SaleItem {
+  id        String   @id @default(uuid())
+  sale      Sale     @relation(fields: [saleId], references: [id])
+  saleId    String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
+  price     Decimal
+}
+
+model Purchase {
+  id        String   @id @default(uuid())
+  supplier   Supplier @relation(fields: [supplierId], references: [id])
+  supplierId String
+  user       User    @relation(fields: [userId], references: [id])
+  userId     String
+  items      PurchaseItem[]
+  total      Decimal @default(0)
+  createdAt  DateTime @default(now())
+}
+
+model PurchaseItem {
+  id        String   @id @default(uuid())
+  purchase  Purchase @relation(fields: [purchaseId], references: [id])
+  purchaseId String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
+  cost      Decimal
+}
+
+model Category {
+  id      String   @id @default(uuid())
+  name    String   @unique
+  products Product[]
+}
+
+model Product {
+  id        String   @id @default(uuid())
+  name      String
+  sku       String   @unique
+  price     Decimal
+  // Relations
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+  inventoryTransactions InventoryTransaction[]
+  saleItems  SaleItem[]
+  purchaseItems PurchaseItem[]
+}
+
+model Supplier {
+  id        String   @id @default(uuid())
+  name      String
+  purchases Purchase[]
+}
+
+model Customer {
+  id    String @id @default(uuid())
+  name  String
+  sales Sale[]
+}
