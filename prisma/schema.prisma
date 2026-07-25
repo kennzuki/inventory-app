@@ -100,6 +100,13 @@ model Product {
   name      String
   sku       String   @unique
   price     Decimal
+  costPrice Decimal?
+  stock     Int      @default(0)
+  reorderPoint Int   @default(10)
+  description String?
+  location  String?
+  supplierId String?
+  supplier   Supplier? @relation(fields: [supplierId], references: [id])
   // Relations
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
@@ -112,6 +119,7 @@ model Supplier {
   id        String   @id @default(uuid())
   name      String
   purchases Purchase[]
+  products  Product[]
 }
 
 model Customer {

@@ -42,7 +42,7 @@ export function SalesTrendChart({ data }: SalesTrendChartProps) {
               tickLine={false}
             />
             <Tooltip
-              formatter={(v: number) => [`$${v.toLocaleString()}`, "Sales"]}
+              formatter={(v: any) => [`$${Number(v ?? 0).toLocaleString()}`, "Sales"]}
               contentStyle={{ fontSize: 12, borderRadius: 8, borderColor: "#e5e5e0" }}
             />
             <Area

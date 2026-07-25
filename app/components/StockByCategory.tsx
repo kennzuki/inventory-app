@@ -6,9 +6,11 @@ import { PIE_COLORS } from "../lib/dashboard-data";
 
 type StockByCategoryChartProps = {
   data: CategoryStock[];
+  colors?: string[];
 };
 
-export function StockByCategoryChart({ data }: StockByCategoryChartProps) {
+export function StockByCategoryChart({ data, colors }: StockByCategoryChartProps) {
+  const palette = colors || PIE_COLORS;
   return (
     <div className="rounded-lg border border-black/10 bg-white px-5 py-4">
       <h2 className="text-sm font-semibold mb-2">Stock by Category</h2>
@@ -25,7 +27,7 @@ export function StockByCategoryChart({ data }: StockByCategoryChartProps) {
                 paddingAngle={2}
               >
                 {data.map((_, i) => (
-                  <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
+                  <Cell key={i} fill={palette[i % palette.length]} />
                 ))}
               </Pie>
               <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
@@ -37,7 +39,7 @@ export function StockByCategoryChart({ data }: StockByCategoryChartProps) {
             <li key={c.name} className="flex items-center gap-2">
               <span
                 className="h-2.5 w-2.5 rounded-sm shrink-0"
-                style={{ backgroundColor: PIE_COLORS[i % PIE_COLORS.length] }}
+                style={{ backgroundColor: palette[i % palette.length] }}
               />
               <span className="text-[#4A4A44]">{c.name}</span>
               <span className="ml-auto font-mono text-[#6B6B63]">{c.value}</span>
