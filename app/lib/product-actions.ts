@@ -163,26 +163,29 @@ export async function createProduct(data: {
   }
 
   // Create Product with Category connectOrCreate
-  const created = await prisma.product.create({
-    data: {
-      name: data.name,
-      sku: data.sku.toUpperCase(),
-      price: data.price,
-      costPrice: data.costPrice,
-      stock: data.stock,
-      reorderPoint: data.reorderPoint,
-      description: data.description,
-      location: data.location,
-      category: {
-        connectOrCreate: {
-          where: { name: data.category.trim() },
-          create: { name: data.category.trim() },
-        },
+const created = await prisma.product.create({
+  data: {
+    name: data.name,
+    sku: data.sku.toUpperCase(),
+    price: data.price,
+    costPrice: data.costPrice,
+    stock: data.stock,
+    reorderPoint: data.reorderPoint,
+    description: data.description,
+    location: data.location,
+    category: {
+      connectOrCreate: {
+        where: { name: data.category.trim() },
+        create: { name: data.category.trim() },
       },
-      supplierId: dbSupplier ? dbSupplier.id : null,
     },
-  });
-
+    ...(dbSupplier && {
+      supplier: {
+        connect: { id: dbSupplier.id },
+      },
+    }),
+  },
+});
   // Create initial transaction if stock > 0
   if (data.stock > 0) {
     await prisma.inventoryTransaction.create({

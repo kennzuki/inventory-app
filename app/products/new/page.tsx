@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "../../components/Sidebar";
-import { TopBar } from "../../components/Topbar";
 import { createProduct } from "../../lib/product-actions";
 import { ArrowLeft, Sparkles, Save, X, Package, DollarSign, Layers, MapPin, Truck } from "lucide-react";
 import Link from "next/link";
@@ -71,13 +69,7 @@ export default function NewProductPage() {
   };
 
   return (
-    <div className="flex h-screen w-full bg-[#F7F6F2] text-[#1A1D1D] font-sans overflow-hidden">
-      <Sidebar />
-
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <TopBar />
-
-        <main className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+    <main className="h-full overflow-y-auto px-6 py-6 space-y-6">
           {/* Header & Back Action */}
           <div className="flex items-center justify-between">
             <div>
@@ -325,7 +317,6 @@ export default function NewProductPage() {
             </div>
           </form>
         </main>
-      </div>
-    </div>
+    </main>
   );
 }

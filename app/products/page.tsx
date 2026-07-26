@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Sidebar from "../components/Sidebar";
-import { TopBar } from "../components/Topbar";
 import { ProductCard } from "../components/ProductCard";
 import { ProductTable } from "../components/ProductTable";
 import {
@@ -97,17 +95,8 @@ export default function ProductPage() {
   const categories = Array.from(new Set(products.map((p) => p.category)));
 
   return (
-    <div className="flex h-screen w-full bg-[#F7F6F2] text-[#1A1D1D] font-sans overflow-hidden">
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* Main Content Area */}
-      <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Topbar */}
-        <TopBar />
-
-        {/* Scrollable Body */}
-        <main className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+    <>
+    <main className="h-full overflow-y-auto px-6 py-6 space-y-6">
           {/* Header & CTA */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
@@ -310,7 +299,6 @@ export default function ProductPage() {
             </div>
           )}
         </main>
-      </div>
 
       {/* Delete Confirmation Modal */}
       {deleteTargetId && (
@@ -342,6 +330,8 @@ export default function ProductPage() {
           </div>
         </div>
       )}
-    </div>
+    
+   
+    </>
   );
 }

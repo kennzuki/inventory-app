@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Sidebar from "../../../components/Sidebar";
-import { TopBar } from "../../../components/Topbar";
 import {
   getProductById,
   updateProduct,
@@ -71,11 +69,7 @@ export function ProductEditClient({ id }: ProductEditClientProps) {
 
   if (!product) {
     return (
-      <div className="flex h-screen w-full bg-[#F7F6F2] text-[#1A1D1D] font-sans">
-        <Sidebar />
-        <div className="flex flex-1 flex-col overflow-hidden">
-          <TopBar />
-          <main className="flex-1 overflow-y-auto px-6 py-12 text-center">
+      <main className="h-full overflow-y-auto px-6 py-12 text-center">
             <div className="max-w-md mx-auto rounded-xl bg-white p-8 border border-black/10 shadow-xs">
               <Boxes size={48} className="mx-auto text-gray-300 mb-3" />
               <h2 className="text-xl font-bold text-[#1A1D1D]">Product Not Found</h2>
@@ -90,9 +84,7 @@ export function ProductEditClient({ id }: ProductEditClientProps) {
                 Return to Products List
               </Link>
             </div>
-          </main>
-        </div>
-      </div>
+      </main>
     );
   }
 
@@ -134,13 +126,7 @@ export function ProductEditClient({ id }: ProductEditClientProps) {
   };
 
   return (
-    <div className="flex h-screen w-full bg-[#F7F6F2] text-[#1A1D1D] font-sans overflow-hidden">
-      <Sidebar />
-
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <TopBar />
-
-        <main className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+    <main className="h-full overflow-y-auto px-6 py-6 space-y-6">
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
@@ -345,8 +331,6 @@ export function ProductEditClient({ id }: ProductEditClientProps) {
               </button>
             </div>
           </form>
-        </main>
-      </div>
-    </div>
+    </main>
   );
 }

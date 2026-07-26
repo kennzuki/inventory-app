@@ -1,8 +1,6 @@
 'use client';
 
-
 import Topkpi from './Topkpi';
-import { TopBar } from './Topbar';
 import { SalesTrendChart } from './SalesTrendChart';
 import { StockByCategoryChart } from './StockByCategory';
 import { TopProductsList } from "./TopProducts";
@@ -18,9 +16,6 @@ const hero = () => {
         <>
             {/* Main column */}
             <div className="flex flex-1 flex-col overflow-hidden">
-                {/* Top bar */}
-                <TopBar />
-
                 {/* Scrollable body */}
                 <main className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
                     <div>

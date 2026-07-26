@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Sidebar from "../../components/Sidebar";
-import { TopBar } from "../../components/Topbar";
 import {
   getProductStatus,
   TransactionType,
@@ -81,11 +79,7 @@ export function ProductDetailsClient({ id }: ProductDetailsClientProps) {
 
   if (!product) {
     return (
-      <div className="flex h-screen w-full bg-[#F7F6F2] text-[#1A1D1D] font-sans">
-        <Sidebar />
-        <div className="flex flex-1 flex-col overflow-hidden">
-          <TopBar />
-          <main className="flex-1 overflow-y-auto px-6 py-12 text-center">
+      <main className="h-full overflow-y-auto px-6 py-12 text-center">
             <div className="max-w-md mx-auto rounded-xl bg-white p-8 border border-black/10 shadow-xs">
               <Boxes size={48} className="mx-auto text-gray-300 mb-3" />
               <h2 className="text-xl font-bold text-[#1A1D1D]">Product Not Found</h2>
@@ -100,9 +94,7 @@ export function ProductDetailsClient({ id }: ProductDetailsClientProps) {
                 Back to Products List
               </Link>
             </div>
-          </main>
-        </div>
-      </div>
+      </main>
     );
   }
 
@@ -169,13 +161,8 @@ export function ProductDetailsClient({ id }: ProductDetailsClientProps) {
   };
 
   return (
-    <div className="flex h-screen w-full bg-[#F7F6F2] text-[#1A1D1D] font-sans overflow-hidden">
-      <Sidebar />
-
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <TopBar />
-
-        <main className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+    <>
+    <main className="h-full overflow-y-auto px-6 py-6 space-y-6">
           {/* Breadcrumb & Navigation */}
           <div className="flex items-center justify-between gap-4">
             <Link
@@ -396,7 +383,7 @@ export function ProductDetailsClient({ id }: ProductDetailsClientProps) {
 
             {transactions.length === 0 ? (
               <div className="py-8 text-center text-xs text-gray-500">
-                No inventory transactions recorded yet for this product. Use "Adjust Stock" to add transactions.
+                No inventory transactions recorded yet for this product. Use Adjust Stock to add transactions.
               </div>
             ) : (
               <div className="overflow-x-auto">
@@ -451,7 +438,6 @@ export function ProductDetailsClient({ id }: ProductDetailsClientProps) {
             )}
           </div>
         </main>
-      </div>
 
       {/* Adjust Stock Modal */}
       {isAdjustModalOpen && (
@@ -568,6 +554,6 @@ export function ProductDetailsClient({ id }: ProductDetailsClientProps) {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
