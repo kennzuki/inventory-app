@@ -1,50 +1,10 @@
 import Link from "next/link";
 import { Plus, Boxes, PackageCheck, AlertTriangle, DollarSign, ArrowUpDown, Eye, Pencil, Trash2 } from "lucide-react";
+import { getSuppliers, deleteSupplier } from "../lib/supplier-actions";
 
-const suppliers = [
-    {
-        id: "1",
-        name: "Supplier 1",
-        productsSupplied: "2",
-        purchaseOrders: "3",
-        totalPurchased: "4",
-        lastPurchase: "5",
-    },
-    {
-        id: "2",
-        name: "Supplier 2",
-        productsSupplied: "2",
-        purchaseOrders: "3",
-        totalPurchased: "4",
-        lastPurchase: "5",
-    },
-    {
-        id: "3",
-        name: "Supplier 3",
-        productsSupplied: "2",
-        purchaseOrders: "3",
-        totalPurchased: "4",
-        lastPurchase: "5",
-    },
-    {
-        id: "4",
-        name: "Supplier 4",
-        productsSupplied: "2",
-        purchaseOrders: "3",
-        totalPurchased: "4",
-        lastPurchase: "5",
-    },
-    {
-        id: "5",
-        name: "Supplier 5",
-        productsSupplied: "2",
-        purchaseOrders: "3",
-        totalPurchased: "4",
-        lastPurchase: "5",
-    },
-];
 
-export default function suppliersPage() {
+export default async function suppliersPage() {
+    const suppliers = await getSuppliers();
     return (
         <main className="h-full overflow-y-auto px-6 py-6 space-y-6">
             {/* Header & CTA */}
@@ -77,7 +37,7 @@ export default function suppliersPage() {
                     </div>
                     <div>
                         <span className="text-xs text-[#6B6B63] font-medium block">Total suppliers</span>
-                        <span className="text-xl font-bold text-[#1A1D1D]">9</span>
+                        <span className="text-xl font-bold text-[#1A1D1D]">{suppliers.length}</span>
                     </div>
                 </div>
 
@@ -163,10 +123,10 @@ export default function suppliersPage() {
                             suppliers.map((supplier) => (
                                 <tr key={supplier.id} className="hover:bg-[#F7F6F2]/70">
                                     <td className="py-3.5 px-4 font-semibold">{supplier.name}</td>
-                                    <td className="py-3.5 px-4 font-mono">{supplier.productsSupplied}</td>
+                                    <td className="py-3.5 px-4 font-mono">{supplier.products.length}</td>
                                     <td className="py-3.5 px-4 font-mono">{supplier.purchaseOrders}</td>
                                     <td className="py-3.5 px-4 font-mono">{supplier.totalPurchased}</td>
-                                    <td className="py-3.5 px-4 text-[#6B6B63]">{supplier.lastPurchase}</td>
+                                    <td className="py-3.5 px-4 text-[#6B6B63]">{supplier.lastPurchase ? new Date(supplier.lastPurchase).toLocaleDateString() : "-"}</td>
                                     <td className="py-3.5 px-4">
                                         <div className="flex items-center justify-end gap-2">
                                             <Link
@@ -183,13 +143,16 @@ export default function suppliersPage() {
                                                 <Pencil size={13} />
                                                 Edit
                                             </Link>
-                                            <button
-                                                type="button"
-                                                className="inline-flex items-center gap-1.5 rounded-md border border-black/10 px-3 py-1.5 text-xs font-medium text-[#4A4A44] hover:border-red-400 hover:text-red-600 transition-colors"
-                                            >
-                                                <Trash2 size={13} />
-                                                Delete
-                                            </button>
+                                            <form action={deleteSupplier} className="inline">
+                                                <input type="hidden" name="id" value={supplier.id} />
+                                                <button
+                                                    type="submit"
+                                                    className="inline-flex items-center gap-1.5 rounded-md border border-black/10 px-3 py-1.5 text-xs font-medium text-[#4A4A44] hover:border-red-400 hover:text-red-600 transition-colors"
+                                                >
+                                                    <Trash2 size={13} />
+                                                    Delete
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
