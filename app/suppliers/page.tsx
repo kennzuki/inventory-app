@@ -93,6 +93,50 @@ export default async function suppliersPage() {
                             </th>
                             <th className="py-3.5 px-4 select-none">
                                 <div className="flex items-center gap-1.5">
+                                    Phone No.
+                                    <ArrowUpDown size={13} className="text-slate-400" />
+                                </div>
+                            </th>
+                            <th className="py-3.5 px-4 select-none">
+                                <div className="flex items-center gap-1.5">
+                                    Email
+                                    <ArrowUpDown size={13} className="text-slate-400" />
+                                </div>
+                            </th>
+                            <th className="py-3.5 px-4 select-none">
+                                <div className="flex items-center gap-1.5">
+                                    Contact
+                                    <ArrowUpDown size={13} className="text-slate-400" />
+                                </div>
+                            </th>
+                            <th className="py-3.5 px-4 select-none">
+                                <div className="flex items-center gap-1.5">
+                                    IsActive                                    <ArrowUpDown size={13} className="text-slate-400" />
+                                </div>
+                            </th>
+                            <th className="py-3.5 px-4 select-none">
+                                <div className="flex items-center gap-1.5">
+                                    Address                                    <ArrowUpDown size={13} className="text-slate-400" />
+                                </div>
+                            </th>
+                            <th className="py-3.5 px-4 select-none">
+                                <div className="flex items-center gap-1.5">
+                                    City                                    <ArrowUpDown size={13} className="text-slate-400" />
+                                </div>
+                            </th>
+                            <th className="py-3.5 px-4 select-none">
+                                <div className="flex items-center gap-1.5">
+                                    Country                                    <ArrowUpDown size={13} className="text-slate-400" />
+                                </div>
+                            </th>
+                            <th className="py-3.5 px-4 select-none">
+                                <div className="flex items-center gap-1.5">
+                                    Products Supplied
+                                    <ArrowUpDown size={13} className="text-slate-400" />
+                                </div>
+                            </th>
+                            <th className="py-3.5 px-4 select-none">
+                                <div className="flex items-center gap-1.5">
                                     Purchase Orders
                                     <ArrowUpDown size={13} className="text-slate-400" />
                                 </div>
@@ -121,10 +165,18 @@ export default async function suppliersPage() {
                             </tr>
                         ) : (
                             suppliers.map((supplier) => (
-                                <tr key={supplier.id} className="hover:bg-[#F7F6F2]/70">
+                                <tr key={supplier.id} className="hover:bg-[#F7F6F2]/70 text-center">
                                     <td className="py-3.5 px-4 font-semibold">{supplier.name}</td>
-                                    <td className="py-3.5 px-4 font-mono">{supplier.products.length}</td>
+                                    <td className="py-2.5 px-3 font-mono">{supplier.products.length}</td>
                                     <td className="py-3.5 px-4 font-mono">{supplier.purchaseOrders}</td>
+                                    <td className="py-3.5 px-4 font-mono">{supplier.totalPurchased}</td>
+                                    <td className="py-3.5 px-4 font-mono">{supplier.totalPurchased}</td>
+                                    <td className="py-3.5 px-4 font-mono">{supplier.totalPurchased}</td>
+                                    <td className="py-3.5 px-4 font-mono">{supplier.totalPurchased}</td>
+                                    <td className="py-3.5 px-4 font-mono">{supplier.totalPurchased}</td>
+                                    <td className="py-3.5 px-4 font-mono">{supplier.totalPurchased}</td>
+                                    <td className="py-3.5 px-4 font-mono">{supplier.totalPurchased}</td>
+                                    <td className="py-3.5 px-4 font-mono">{supplier.totalPurchased}</td>
                                     <td className="py-3.5 px-4 font-mono">{supplier.totalPurchased}</td>
                                     <td className="py-3.5 px-4 text-[#6B6B63]">{supplier.lastPurchase ? new Date(supplier.lastPurchase).toLocaleDateString() : "-"}</td>
                                     <td className="py-3.5 px-4">
@@ -161,7 +213,7 @@ export default async function suppliersPage() {
                     </tbody>
                 </table>
 
-</div>
+            </div>
 
         </main>
     );

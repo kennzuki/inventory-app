@@ -193,7 +193,18 @@ async function main() {
   console.log(`Seeding ${supplierNames.length} suppliers...`);
   const supplierMap = {};
   for (const name of supplierNames) {
-    const sup = await prisma.supplier.create({ data: { name } });
+    const sup = await prisma.supplier.create({
+      data: {
+        name,
+        contact: `${name} Contact`,
+        email: `${name.replace(/\s+/g, "").toLowerCase()}@example.com`,
+        phone: "123-456-7890",
+        address: "123 Main St",
+        city: "Metropolis",
+        country: "USA",
+        isActive: true,
+      },
+    });
     supplierMap[name] = sup.id;
   }
 
