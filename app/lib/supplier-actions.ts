@@ -6,6 +6,8 @@ import { revalidatePath } from "next/cache";
 
 export async function getSuppliers() {
     return await prisma.supplier.findMany({
+        //include all fields
+        
         include: {
             products: {
                 select: {
@@ -82,4 +84,9 @@ export async function updateSupplier(id: string, formData: FormData) {
         data: { name },
     });
     revalidatePath("/suppliers");
+}
+
+//get product supplied by suppliers
+export async function getProductsSuppliedCount(supplierId: string) {
+  return prisma.product.count({ where: { supplierId } });
 }
