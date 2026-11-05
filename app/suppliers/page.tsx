@@ -4,6 +4,8 @@ import { getSuppliers } from "../lib/supplier-actions";
 import SuppliersTable from "../components/SuppliersTable";
 import SuppliersCards from "../components/SuppliersCards";
 
+export const dynamic = "force-dynamic";
+
 export default async function suppliersPage() {
     const suppliers = await getSuppliers();
 

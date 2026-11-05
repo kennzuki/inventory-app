@@ -257,7 +257,9 @@ export async function updateProduct(
           create: { name: data.category.trim() },
         },
       },
-      supplierId: dbSupplier ? dbSupplier.id : null,
+      supplier: dbSupplier
+        ? { connect: { id: dbSupplier.id } }
+        : { disconnect: true },
     },
   });
 
