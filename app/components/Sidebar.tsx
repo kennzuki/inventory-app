@@ -15,7 +15,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/Dashboard", icon: LayoutDashboard },
   { name: "Products", href: "/products", icon: Package },
   { name: "Categories", href: "/categories", icon: FolderTree },
   { name: "Suppliers", href: "/suppliers", icon: Truck },
@@ -41,7 +41,7 @@ export default function Sidebar() {
       <nav className="flex-1 overflow-y-auto py-3">
         {NAV_ITEMS.map(({ name, href, icon: Icon }) => {
           const isActive =
-            pathname === href || (href !== "/dashboard" && pathname.startsWith(href));
+            pathname === href || (href !== "/Dashboard" && pathname.startsWith(href));
 
           return (
             <Link
